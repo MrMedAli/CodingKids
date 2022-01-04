@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +33,7 @@ public class viewListActivity extends AppCompatActivity {
         final FirebaseUser users = firebaseAuth.getCurrentUser();
         String finaluser=users.getEmail();
         String resultemail = finaluser.replace(".","");
-        mdatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(resultemail).child("StudentItem");
+        mdatabaseReference = FirebaseDatabase.getInstance("https://codingkids-ed591-default-rtdb.firebaseio.com/").getReference("Users").child(resultemail).child("StudentItem");
         mrecyclerview = findViewById(R.id.recyclerViews);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         mrecyclerview.setLayoutManager(manager);
@@ -82,25 +81,25 @@ public class viewListActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected  void  onStart() {
-        super.onStart();
-
-        FirebaseRecyclerAdapter<StudentItem, scanStudentsActivity.UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<StudentItem, scanStudentsActivity.UsersViewHolder>
-                (  StudentItem.class,
-                        R.layout.list_layout,
-                        scanStudentsActivity.UsersViewHolder.class,
-                        mdatabaseReference )
-        {
-            @Override
-            protected void populateViewHolder(scanStudentsActivity.UsersViewHolder viewHolder, StudentItem model, int position){
-
-                viewHolder.setDetails(getApplicationContext(),model.getstudentqrcode(),model.getstudentname(),model.getstudentid(),model.getstudentlastname());
-            }
-        };
-
-        mrecyclerview.setAdapter(firebaseRecyclerAdapter);
-    }
+    //@Override
+//    protected  void  onStart() {
+    //      super.onStart();
+//
+            //      FirebaseRecyclerAdapter<StudentItem, scanStudentsActivity.UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<StudentItem, scanStudentsActivity.UsersViewHolder>
+    //  (  StudentItem.class,
+    //                  R.layout.list_layout,
+    //                  scanStudentsActivity.UsersViewHolder.class,
+    //                  mdatabaseReference )
+    //  {
+    //      @Override
+            //protected void populateViewHolder(scanStudentsActivity.UsersViewHolder viewHolder, StudentItem model, int position){
+//
+    //              viewHolder.setDetails(getApplicationContext(),model.getstudentqrcode(),model.getstudentname(),model.getstudentid(),model.getstudentlastname());
+    //      }
+            //  };
+//
+    //      mrecyclerview.setAdapter(firebaseRecyclerAdapter);
+    //}
 //    public static class UsersViewHolder extends RecyclerView.ViewHolder{
 //        View mView;
 //        public UsersViewHolder(View itemView){

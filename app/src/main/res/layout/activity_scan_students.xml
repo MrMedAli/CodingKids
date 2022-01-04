@@ -1,86 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".scanStudentsActivity"
-    android:orientation="vertical"
-    android:background="@drawable/background">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/MainBack"
+    tools:context=".scanStudentsActivity">
 
-    <android.support.v7.widget.Toolbar
-
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/yellow"
-        android:id="@+id/toolbar"
-        android:padding="10dp"
-
-        tools:ignore="MissingConstraints"
-        android:layout_marginBottom="70dp">
-
-        <ImageButton
-            android:id="@+id/back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:baselineAlignBottom="true"
-            android:src="@drawable/ic_baseline_arrow_back_ios_24back"
-            android:background="@null"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="chercher un etudiant"
-            android:textColor="#2196F3"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-    </android.support.v7.widget.Toolbar>
-
-    <ImageButton
-        android:id="@+id/imageButtonsearch"
-        android:layout_width="58dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:layout_marginLeft="315dp"
-        app:srcCompat="@drawable/ic_camera_alt_black_24dp"
-        tools:ignore="VectorDrawableCompat" />
-
-
-    <EditText
-        android:id="@+id/searchfield"
-        android:layout_width="289dp"
-        android:layout_height="35dp"
-
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="-38dp"
-        android:background="@drawable/gradient"
-        android:drawableLeft="@drawable/ic_search_black_24dp"
-        android:ems="10"
-        android:hint="codde Qr"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#F7F2F2"
-        android:textSize="16dp" />
-
-    <Button
-        android:id="@+id/searchbtnn"
-        android:layout_marginTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginLeft="150dp"
-        android:text="chercher"
-        android:textColor="#F7F2F2" />
-
-    <android.support.v7.widget.RecyclerView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerViews"
-        android:layout_marginTop="40dp">
+        android:paddingBottom="100dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:clipToPadding="false">
 
-    </android.support.v7.widget.RecyclerView>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/classes_sample"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Etudiant"
+                android:layout_marginLeft="16dp"
+                android:textColor="@color/theme_light"
+                android:layout_marginRight="16dp"/>
 
-</LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp" />
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_beginner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/only_dot"
+        android:background="#FFFFFF"
+        app:title="         chercher des étudiants"
+        />
+    <android.support.design.widget.FloatingActionButton
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:backgroundTint="#FFFFFF"
+        android:id="@+id/rtrnbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24back"
+        app:layout_anchor="@id/toolbar_beginner"
+        app:borderWidth="0dp"
+
+        app:tint="@null"
+        />
+
+    <android.support.design.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+        app:fabAlignmentMode="end">
+        <EditText
+            android:id="@+id/searchfield"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="55dp"
+            android:layout_marginLeft="55dp"/>
+    </android.support.design.bottomappbar.BottomAppBar>
+
+    <android.support.design.widget.FloatingActionButton
+        android:backgroundTint="@color/colorPrimary"
+        android:id="@+id/scanStudentbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_camera_alt_black_24dp"
+        app:borderWidth="0dp"
+        app:layout_anchor="@id/bottomAppBar"
+        app:tint="@null" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_marginLeft="7dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:id="@+id/searchbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_search_black_24dp"
+        app:layout_anchor="@id/bottomAppBar"
+        app:borderWidth="0dp"
+        app:tint="@null"
+        />
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,33 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/MainBack"
     tools:context=".addClass">
 
-    <include
-        android:id="@+id/toolbarClass"
-        layout="@layout/toolbar"/>
-
-<android.support.design.widget.FloatingActionButton
-    android:id="@+id/fab_main"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:layout_margin="24dp"
-    android:src="@drawable/ic_add_black_add"/>
-
-    />
-    
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/toolbarClass"
-        android:id="@+id/recyclerView"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="100dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/classes_sample"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="classes"
+                android:layout_marginLeft="16dp"
+                android:textColor="@color/theme_light"
+                android:layout_marginRight="16dp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_beginner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:title="           Gestion des classes"
+        />
+    <android.support.design.widget.FloatingActionButton
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:backgroundTint="#FFFFFF"
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24back"
+        app:layout_anchor="@id/toolbar_beginner"
+        app:borderWidth="0dp"
+
+        app:tint="@null"
         />
 
+    <android.support.design.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+        app:fabAlignmentMode="end"
 
+        app:menu="@menu/bottom_app_bar"/>
 
-</RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_main"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_round_add_24"
+        app:layout_anchor="@id/bottomAppBar"
+        app:borderWidth="0dp"
+        app:tint="@null"
+        />
+
+</android.support.design.widget.CoordinatorLayout>

@@ -8,6 +8,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -23,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText editTextName, editTextEmail, editTextPassword, editTextPhone,editTextcPassword;
     public Button UserRegisterBtn;
     private ProgressBar progressBar;
-
+    private LinearLayout goSignIn;
     private FirebaseAuth mAuth;
 
     @Override
@@ -31,11 +32,11 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        editTextName = findViewById(R.id.departmentName);
-        editTextEmail = findViewById(R.id.emailRegister);
-        editTextPassword = findViewById(R.id.passwordRegister);
-        editTextcPassword= findViewById(R.id.confirmPassword);
-        UserRegisterBtn= findViewById(R.id.button_register);
+        editTextName = findViewById(R.id.adminSignUpNameET);
+        editTextEmail = findViewById(R.id.adminSignUpEmailET);
+        editTextPassword = findViewById(R.id.adminSignUpPasswordET);
+        editTextcPassword= findViewById(R.id.adminSignUPConfirmPassET);
+        UserRegisterBtn= findViewById(R.id.signUpBtn);
 //        editTextPhone = findViewById(R.id.edit_text_phone);
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.GONE);
@@ -50,6 +51,14 @@ public class RegisterActivity extends AppCompatActivity {
                 registerUser();
             }
         });
+        goSignIn = findViewById(R.id.goSignIN);
+        goSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -62,37 +71,18 @@ public class RegisterActivity extends AppCompatActivity {
             //handle the already login user
         }
     }
-//    public void addStudent(){
-//        String studentNameValue = editTextName.getText().toString();
-//        String mcneeseIdValue = editTextEmail.getText().toString();
-//        if(!TextUtils.isEmpty(studentNameValue)&&!TextUtils.isEmpty(mcneeseIdValue)){
-//            String id = FirebaseDatabase.getInstance().getReference("Users").push().getKey();
-//            User students = new User(studentNameValue,mcneeseIdValue);
-//            // databaseReference.child(bttnName.getText().toString()).push().setValue(students);
-//            FirebaseDatabase.getInstance().getReference("Users").setValue(students);
-//            editTextName.setText("");
-//            editTextEmail.setText("");
-//            Toast.makeText(RegisterActivity.this,"Student Details Added",Toast.LENGTH_SHORT).show();
-//        }
-//        else{
-//            Toast.makeText(RegisterActivity.this,"Please Fill Fields",Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
-
     private void registerUser() {
         final String name = editTextName.getText().toString().trim();
         final String email = editTextEmail.getText().toString();
         String password = editTextPassword.getText().toString().trim();
         String cpassword = editTextcPassword.getText().toString().trim();
-        // final String phone = editTextPhone.getText().toString().trim();
         if (email.isEmpty()) {
-            editTextEmail.setError("It's empty");
+            editTextEmail.setError("Vide");
             editTextEmail.requestFocus();
             return;
         }
         if (name.isEmpty()) {
-            editTextName.setError("It's Empty");
+            editTextName.setError("Vide");
             editTextName.requestFocus();
             return;
         }
@@ -100,40 +90,27 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("Not a valid emailaddress");
+            editTextEmail.setError("Adresse courriel invalide");
             editTextEmail.requestFocus();
             return;
         }
 
         if (password.isEmpty()) {
-            editTextPassword.setError("Its empty");
+            editTextPassword.setError("Vide");
             editTextPassword.requestFocus();
             return;
         }
 
         if (password.length() < 6) {
-            editTextPassword.setError("Less length");
+            editTextPassword.setError("mot de passe faible");
             editTextPassword.requestFocus();
             return;
         }
         if(!password.equals(cpassword)){
-            editTextcPassword.setError("Password Donot Match");
+            editTextcPassword.setError("\n" + "Le mot de passe ne correspond pas");
             editTextcPassword.requestFocus();
             return;
         }
-
-//        if (phone.isEmpty()) {
-//            editTextPhone.setError(getString(R.string.input_error_phone));
-//            editTextPhone.requestFocus();
-//            return;
-//        }
-//
-//        if (phone.length() != 10) {
-//            editTextPhone.setError(getString(R.string.input_error_phone_invalid));
-//            editTextPhone.requestFocus();
-//            return;
-//        }
-
 
         progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -154,7 +131,7 @@ public class RegisterActivity extends AppCompatActivity {
                             //important to retrive data and send data based on user email
                             FirebaseUser usernameinfirebase = mAuth.getCurrentUser();
                             String UserID=usernameinfirebase.getEmail();
-                           // String result = UserID.substring(0, UserID.indexOf("@"));
+                            // String result = UserID.substring(0, UserID.indexOf("@"));
                             String resultemail = UserID.replace(".","");
 
                             FirebaseDatabase.getInstance().getReference("Users")
@@ -165,7 +142,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     progressBar.setVisibility(View.GONE);
                                     if (task.isSuccessful()) {
 
-                                        Toast.makeText(RegisterActivity.this, "Registration Success", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(RegisterActivity.this, "\n" + "Inscription réussie", Toast.LENGTH_LONG).show();
                                         startActivity(new Intent(RegisterActivity.this,dashboardActivity.class));
                                     } else {
                                         //display a failure message
@@ -175,7 +152,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         } else {
                             progressBar.setVisibility(View.GONE);
-                            Toast.makeText(RegisterActivity.this, "Registration Failed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, "Échec de l'enregistrement\n", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

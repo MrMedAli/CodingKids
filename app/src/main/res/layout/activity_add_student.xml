@@ -1,137 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".RegisterActivity">
-    <include
-        android:id="@+id/toolbarStudent"
-        layout="@layout/toolbar"/>
-
-    <EditText
-        android:id="@+id/identificateur"
+    tools:context=".addStudentActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/addStudentToolbar"
+        android:background="@color/colorPrimary"
+        app:title="Ajouter un étudiant"
+        app:titleTextColor="@color/colorWhite"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="5dp"
-        android:layout_marginTop="60dp"
-        android:layout_below="@id/toolbarStudent"
-        android:background="@drawable/blanks"
-        android:drawableStart="@drawable/id"
-        android:drawablePadding="10dp"
-        android:hint="identificateur"
-        android:inputType="number"
-        android:padding="10dp"
-        android:drawableLeft="@drawable/id" />
+        android:layout_height="wrap_content"/>
 
-    <EditText
-        android:id="@+id/nom"
+    <LinearLayout
+        android:padding="17dp"
+        android:orientation="vertical"
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/identificateur"
-        android:layout_margin="5dp"
-        android:background="@drawable/blanks"
-        android:drawableStart="@drawable/id"
-        android:drawablePadding="10dp"
-        android:hint="nom"
-        android:inputType="text"
-        android:padding="10dp" />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/prenom"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/nom"
-        android:layout_margin="5dp"
-        android:background="@drawable/blanks"
-        android:drawableStart="@drawable/id"
-        android:drawablePadding="10dp"
-        android:hint="prénom"
-        android:inputType="text"
-        android:padding="10dp" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="10dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/mail"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/prenom"
-        android:layout_margin="5dp"
-        android:background="@drawable/blanks"
-        android:drawableStart="@drawable/mail"
-        android:drawablePadding="10dp"
-        android:hint="mail"
-        android:inputType="textEmailAddress"
-        android:padding="10dp" />
+            <EditText
+                android:id="@+id/addStudentName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableTint="@color/colorPrimary"
+                android:hint="Nom"
+                android:inputType="text" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="10dp"
 
-    <EditText
-        android:id="@+id/tel1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/mail"
-        android:layout_margin="5dp"
-        android:background="@drawable/blanks"
-        android:drawableStart="@drawable/phone"
-        android:drawablePadding="10dp"
-        android:hint="numéro du teliphone"
-        android:inputType="phone"
-        android:padding="10dp" />
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:drawableTint="@color/colorPrimary"
+                android:id="@+id/addStudentLName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="prénom"
+                android:inputType="text" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="10dp"
 
-    <EditText
-        android:id="@+id/tel2"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/tel1"
-        android:layout_margin="5dp"
-        android:background="@drawable/blanks"
-        android:drawableStart="@drawable/phone"
-        android:drawablePadding="10dp"
-        android:hint="numéro du teliphone"
-        android:inputType="number"
-        android:padding="10dp" />
-
-    <TextView
-        android:id="@+id/barcodeview"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@+id/tel2"
-        android:layout_margin="5dp"
-        android:background="@drawable/blanks"
-        android:drawableStart="@drawable/qr_code"
-        android:inputType="textPersonName"
-        android:hint="QR Code Number"
-        android:drawablePadding="10dp"
-        android:padding="10dp" />
-
-    <Button
-        android:id="@+id/buttonscan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/barcodeview"
-        android:layout_centerHorizontal="true"
-
-        android:layout_marginBottom="-70dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Code QR"
-        android:textStyle="italic"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="211dp" />
-
-    <Button
-        android:id="@+id/addstudentbuttontodatabase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/buttonscan"
-        android:layout_centerHorizontal="true"
-
-        android:layout_marginBottom="-70dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Ajouter"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="211dp" />
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:drawableTint="@color/colorPrimary"
+                android:id="@+id/addStudentPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="numéro de téléphone"
+                android:inputType="number"
+                android:drawableRight="@drawable/phone"/>
+        </android.support.design.widget.TextInputLayout>
 
 
-</RelativeLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="10dp"
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:drawableTint="@color/colorPrimary"
+                android:id="@+id/addStudentPhone2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="numéro de téléphone"
+                android:inputType="number"
+                android:drawableRight="@drawable/phone"/>
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="10dp"
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+
+                    android:id="@+id/addStudentID"
+                    android:drawableTint="@color/colorPrimary"
+                    android:layout_width="250dip"
+                    android:layout_height="wrap_content"
+                    android:hint="Code QR"
+                    android:inputType="textPersonName"
+                    android:background="@android:drawable/editbox_background"
+                    android:drawableRight="@drawable/qr_code"
+                    />
+
+                <Button
+                    android:backgroundTint="@color/blueLink"
+                    android:id="@+id/scanbtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignRight="@id/addStudentID"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="1dip"
+                    android:text="scanner" />
+
+            </RelativeLayout>
+
+
+
+
+        </android.support.design.widget.TextInputLayout>
+
+
+
+        <Button
+            android:id="@+id/addStudentBtn"
+            android:textColor="@color/colorWhite"
+            android:text="Ajouter un étudiant"
+            android:background="@drawable/shape_gradient_button"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

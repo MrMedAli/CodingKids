@@ -20,11 +20,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class addStudentActivity extends AppCompatActivity {
-    private EditText studentid,studentname,studentlastname;
+    private EditText studentid,studentname,studentlastname,studentphone1,studentphone2;
     private TextView studentqrcode;
     private FirebaseAuth firebaseAuth;
     public static TextView resulttextview;
     Button scanbutton, additemtodatabase;
+    DBhelper dBhelper;
 
     Toolbar toolbar;
     DatabaseReference databaseReference;
@@ -34,18 +35,21 @@ public class addStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_student);
         firebaseAuth = FirebaseAuth.getInstance();
+        dBhelper = new DBhelper(this);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-        databaseReferencecat = FirebaseDatabase.getInstance().getReference("Users");
-        resulttextview = findViewById(R.id.barcodeview);
-        additemtodatabase = findViewById(R.id.addstudentbuttontodatabase);
-        scanbutton = findViewById(R.id.buttonscan);
-        studentid = findViewById(R.id.identificateur);
-        studentname= findViewById(R.id.nom);
-        studentlastname = findViewById(R.id.prenom);
-        studentqrcode= findViewById(R.id.barcodeview);
+        databaseReference = FirebaseDatabase.getInstance("https://codingkids-ed591-default-rtdb.firebaseio.com").getReference("Users");
+        databaseReferencecat = FirebaseDatabase.getInstance("https://codingkids-ed591-default-rtdb.firebaseio.com").getReference("Users");
+        resulttextview = findViewById(R.id.addStudentID);
+        additemtodatabase = findViewById(R.id.addStudentBtn);
+        scanbutton = findViewById(R.id.scanbtn);
+        //studentid = findViewById(R.id.StudentID);
+        studentname= findViewById(R.id.addStudentName);
+        studentlastname = findViewById(R.id.addStudentLName);
+        studentqrcode= findViewById(R.id.addStudentID);
+        studentphone1 = findViewById(R.id.addStudentPhone);
+        studentphone2= findViewById(R.id.addStudentPhone2);
 
-        setToolbar();
+
 
 
 
@@ -63,7 +67,15 @@ public class addStudentActivity extends AppCompatActivity {
         additemtodatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                additem();
+
+               // String studentidValue = studentid.getText().toString();
+                String studentnameValue = studentname.getText().toString();
+                String studentlastnameValue = studentlastname.getText().toString();
+                String studentqrcodeValue = studentqrcode.getText().toString();
+                String studentphone1Value = studentphone1.getText().toString();
+                String studentphone2Value = studentphone2.getText().toString();
+
+                addStudent(studentnameValue,studentlastnameValue,studentqrcodeValue,studentphone1Value,studentphone2Value);
             }
         });
 
@@ -72,48 +84,125 @@ public class addStudentActivity extends AppCompatActivity {
     }
     private void setToolbar() {
         toolbar = findViewById(R.id.toolbar);
-        TextView title = toolbar.findViewById(R.id.title_toolbar);
+
         TextView subtitle = toolbar.findViewById(R.id.subtitle_toolbar);
         ImageButton back = toolbar.findViewById(R.id.back);
         ImageButton save = toolbar.findViewById(R.id.savebtn);
 
 
-        title.setText("Ajouter un etudiant");
+
         subtitle.setVisibility(View.GONE);
         save.setVisibility(View.INVISIBLE);
         back.setOnClickListener(v-> onBackPressed());
     }
 
+    private void addStudent(String StudentName, String StudentLName, String QrCode, String Phone1, String Phone2){
+            String studentnameValue = StudentName;
+            String studentlastnameValue = StudentLName;
+            String studentqrcodeValue = QrCode;
+            String studentphone1Value = Phone1;
+            String studentphone2Value = Phone2;
+
+            if (studentqrcodeValue.isEmpty()) {
+                studentqrcode.setError("Vide");
+                studentqrcode.requestFocus();
+                return;
+            }
+            if (studentnameValue.isEmpty()) {
+                studentname.setError("Vide");
+                studentname.requestFocus();
+                return;
+            }
+            if (studentlastnameValue.isEmpty()) {
+                studentlastname.setError("Vide");
+                studentlastname.requestFocus();
+                return;
+            }
+            if (studentphone1Value.isEmpty()) {
+                studentphone1.setError("Vide");
+                studentphone1.requestFocus();
+                return;
+            }
+            if (studentphone2Value.isEmpty()) {
+                studentphone2Value = "000000000";
+            }
+
+
+            if(!TextUtils.isEmpty(studentnameValue)&&!TextUtils.isEmpty(studentlastnameValue)){
+                long Sid = dBhelper.addStudent(StudentName,StudentLName,QrCode,Phone1,Phone2);
+
+                studentqrcode.setText("");
+                studentlastname.setText("");
+                studentname.setText("");
+                studentqrcode.setText("");
+                studentphone1.setText("");
+                studentphone2.setText("");
+
+                Toast.makeText(addStudentActivity.this,Sid+" est ajouté",Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(addStudentActivity.this,"Veuillez remplir tous les champs",Toast.LENGTH_SHORT).show();
+            }
+
+
+
+        //StudentItem studentItem = new StudentItem(Long.toString(Sid),StudentName,StudentLName,QrCode,Phone1,Phone2);
+        //additem(Long.toString(Sid),StudentName,StudentLName,QrCode,Phone1,Phone2);
+
+    }
 // addding item to databse
-public  void additem(){
-        String studentidValue = studentid.getText().toString();
-        String studentnameValue = studentname.getText().toString();
-        String studentlastnameValue = studentlastname.getText().toString();
-        String studentqrcodeValue = studentqrcode.getText().toString();
-         final FirebaseUser users = firebaseAuth.getCurrentUser();
+public  void additem(String Sid, String StudentName, String StudentLName, String QrCode, String Phone1, String Phone2){
+        String studentidValue = Sid;
+        String studentnameValue = StudentName;
+        String studentlastnameValue = StudentLName;
+        String studentqrcodeValue = QrCode;
+        String studentphone1Value = Phone1;
+        String studentphone2Value = Phone2;
+        final FirebaseUser users = firebaseAuth.getCurrentUser();
         String finaluser=users.getEmail();
-         String resultemail = finaluser.replace(".","");
+        String resultemail = finaluser.replace(".","");
     if (studentqrcodeValue.isEmpty()) {
-        studentqrcode.setError("It's Empty");
+        studentqrcode.setError("Vide");
         studentqrcode.requestFocus();
         return;
+    }
+    if (studentnameValue.isEmpty()) {
+        studentname.setError("Vide");
+        studentname.requestFocus();
+        return;
+    }
+    if (studentlastnameValue.isEmpty()) {
+        studentlastname.setError("Vide");
+        studentlastname.requestFocus();
+        return;
+    }
+    if (studentphone1Value.isEmpty()) {
+        studentphone1.setError("Vide");
+        studentphone1.requestFocus();
+        return;
+    }
+    if (studentphone2Value.isEmpty()) {
+        studentphone2Value = "000000000";
     }
 
 
     if(!TextUtils.isEmpty(studentidValue)&&!TextUtils.isEmpty(studentnameValue)&&!TextUtils.isEmpty(studentlastnameValue)){
 
-        StudentItem studentItem = new StudentItem(studentidValue,studentnameValue,studentlastnameValue,studentqrcodeValue);
-        databaseReference.child(resultemail).child("StudentItem").child(studentqrcodeValue).setValue(studentItem);
-        databaseReferencecat.child(resultemail).child("ItemByCategory").child(studentnameValue).child(studentqrcodeValue).setValue(studentItem);
         studentid.setText("");
         studentqrcode.setText("");
         studentlastname.setText("");
+        studentname.setText("");
         studentqrcode.setText("");
-        Toast.makeText(addStudentActivity.this,studentidValue+" Added",Toast.LENGTH_SHORT).show();
+        studentphone1.setText("");
+        studentphone2.setText("");
+
+        Toast.makeText(addStudentActivity.this,studentidValue+" est ajouté",Toast.LENGTH_SHORT).show();
     }
     else {
-        Toast.makeText(addStudentActivity.this,"Please Fill all the fields",Toast.LENGTH_SHORT).show();
+        Toast.makeText(addStudentActivity.this,"Veuillez remplir tous les champs",Toast.LENGTH_SHORT).show();
     }
+
+
 }
 
 

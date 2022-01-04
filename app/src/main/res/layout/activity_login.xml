@@ -1,92 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".MainActivity"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="17dp"
+    tools:context=".LoginActivity">
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="252dp"
-        android:layout_height="218dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        app:srcCompat="@drawable/inventory" />
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/inventory" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="202dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:text="
+Connexion administrateur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <android.support.design.widget.TextInputLayout
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:drawableTint="@color/colorGray"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/mail"
+            android:id="@+id/emailSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="User name"
+            android:inputType="text" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-88dp"
-        android:fontFamily="@font/allura"
-        android:text=""
-        android:textColor="#C1F8B0B0"
-        android:textSize="53dp"
-        android:textStyle="bold" />
+        app:passwordToggleDrawable="@drawable/ic_pass_icon_selector"
+        app:passwordToggleEnabled="true">
 
-    <EditText
-        android:id="@+id/emailSignIn"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-65dp"
-        android:background="#FFEB3B"
-        android:drawableLeft="@drawable/ic_account_user"
-        android:ems="10"
-        android:hint="User Name"
-        android:inputType="textPersonName"
-        android:textColor="#00BCD4"
-        android:textColorHint="#00BCD4"
-        android:textSize="16dp" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_alignBottom="@+id/emailSignIn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="-50dp"
-        android:background="#FFEB3B"
-        android:textColorHint="#00BCD4"
-        android:textColor="#00BCD4"
-        android:ems="10"
-        android:hint="Password"
-        android:password="true"
-        android:drawableLeft="@drawable/ic_password"
-        android:inputType="textPassword" />
-
+        <EditText
+            android:drawableTint="@color/colorPrimary"
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_lock"
+            android:hint="Password"
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/Login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/password"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="-94dp"
-        android:background="#00BCD4"
-        android:text="Login"
-        android:textColor="#FFFF"
-        android:textSize="20dp" />
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_gradient_button"
+        android:textColor="@color/colorWhite"
+        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:text="c o n n e x i o n"
+        android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/forgotpassword"
+    <LinearLayout
+        android:id="@+id/goSignUP"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/Login"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="-38dp"
-        android:textColor="#00BCD4"
-        android:text="Forgot Password ?"
-        android:clickable="true"/>
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="créer un nouveau compte "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:text="cliquez ici"
+            android:textColor="@color/colorPrimary" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/pwForgoten"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/forgotpassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:text="  mot de passe oublié"
+            android:clickable="true"
+            android:drawableLeft="@drawable/ic_vpn_key_black_24dp"/>
+
+    </LinearLayout>
     <ProgressBar
         android:id="@+id/progressbars"
         android:layout_width="wrap_content"
@@ -94,6 +107,4 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
 
-
-</RelativeLayout>
-
+</LinearLayout>

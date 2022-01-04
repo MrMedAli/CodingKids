@@ -1,6 +1,8 @@
 package com.example.admin.augscan;
 
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -32,34 +34,11 @@ public class MyDialog extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         Dialog dialog=null;
         if(getTag().equals(CLASS_ADD_DIALOG))dialog=getAddClassDialog();
-        if(getTag().equals(STUDENT_ADD_DIALOG))dialog=getAddStudentDialog();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         return dialog;
     }
 
-    private Dialog getAddStudentDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog, null);
-        builder.setView(view);
-        TextView title =view.findViewById(R.id.titleDialog);
-        title.setText("Ajouter un nouvel etudiant");
-
-        EditText roll_edt = view.findViewById(R.id.edt01);
-        EditText name_edt = view.findViewById(R.id.ed02);
-        ImageButton cam = view.findViewById(R.id.imageButtonsearch);
-        roll_edt.setHint("Roll");
-        name_edt.setHint("Nom");
-        Button cancel = view.findViewById(R.id.Cancel_id);
-        Button add = view.findViewById(R.id.add_id);
-
-        cancel.setOnClickListener(v-> dismiss());
-        add.setOnClickListener(v-> {
-            String roll= roll_edt.getText().toString();
-            String name= name_edt.getText().toString();
-            roll_edt.setText(Integer.parseInt(roll)+1);
-            listener.onClick(roll, name);
-        });
-        return builder.create();
-    }
 
     private Dialog getAddClassDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

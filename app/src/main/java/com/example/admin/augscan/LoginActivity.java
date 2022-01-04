@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView passwordreset;
     private EditText passwordresetemail;
     private ProgressBar progressBar;
+    private LinearLayout goSignUp;
 
     private FirebaseAuth auth;
     private ProgressDialog processDialog;
@@ -36,6 +38,14 @@ public class LoginActivity extends AppCompatActivity {
         Email = (EditText) findViewById(R.id.emailSignIn);
         Password = (EditText) findViewById(R.id.password);
         Login = (Button) findViewById(R.id.Login);
+        goSignUp= findViewById(R.id.goSignUP);
+        goSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
 
         passwordreset = findViewById(R.id.forgotpassword);
         passwordresetemail = findViewById(R.id.emailSignIn);
@@ -66,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         final String resetemail = passwordresetemail.getText().toString();
 
         if (resetemail.isEmpty()) {
-            passwordresetemail.setError("It's empty");
+            passwordresetemail.setError("Vide");
             passwordresetemail.requestFocus();
             return;
         }
@@ -77,14 +87,17 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Nous vous avons envoyé des instructions pour réinitialiser votre mot de passe!", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         } else {
-                            Toast.makeText(LoginActivity.this, "Failed to send reset email!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "\n" + "Échec de l'envoi de l'e-mail de réinitialisation!", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         }
 
                         progressBar.setVisibility(View.GONE);
                     }
                 });
+
     }
 
 
@@ -100,11 +113,11 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     processDialog.dismiss();
-                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "connecté avec succès", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, dashboardActivity.class));
                 }
                 else{
-                    Toast.makeText(LoginActivity.this,"Login Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"erreur de connexion", Toast.LENGTH_SHORT).show();
                     processDialog.dismiss();
                 }
             }

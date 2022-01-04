@@ -1,62 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".MainActivity"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="17dp"
+    tools:context=".MainActivity">
+    <LinearLayout
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="257dp"
-        android:layout_height="347dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
-        app:srcCompat="@drawable/inventory" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="221dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-106dp"
-        android:fontFamily="@font/allura"
-        android:text=""
-        android:textColor="#C1F8B0B0"
-        android:textSize="63dp"
-        android:textStyle="bold" />
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/codingKIDS"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/inventory" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/LoginButtonMain"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="-55dp"
-        android:background="#FFFFFF"
-        android:drawableLeft="@drawable/ic_person_login"
-        android:hint="Login"
-        android:onClick="login"
-        android:textColorHint="#BCBCBC"
-        android:textSize="18dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="16dp"
+        android:weightSum="1">
 
-    <Button
-        android:id="@+id/SignUpMain"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_alignBottom="@+id/LoginButtonMain"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginBottom="-62dp"
-        android:background="#FFFFFF"
-        android:drawableLeft="@drawable/ic_person_register"
-        android:hint="Register"
-        android:onClick="register"
-        android:textColorHint="#BDBDBD"
-        android:textSize="18dp" />
-</RelativeLayout>
+        <android.support.v7.widget.CardView
+            android:id="@+id/LoginButtonMain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cardCornerRadius="12dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="login">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CONNEXION"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:padding="12dp"
+                    android:textSize="14dp"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:background="@color/theme_light"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="16dp"
+        android:weightSum="1"
+        android:onClick="register">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/SignUpMain"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cardCornerRadius="12dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="S'INSCRIRE"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:textSize="14dp"
+                    android:maxLines="1"
+                    android:textColor="@color/white"
+                    android:background="@color/theme_light"/>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

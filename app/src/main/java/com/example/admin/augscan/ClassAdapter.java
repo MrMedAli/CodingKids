@@ -3,6 +3,7 @@ package com.example.admin.augscan;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         this.context= context;
     }
 
-    public  static class ClassViewHolder extends RecyclerView.ViewHolder{
+    public  static class ClassViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
         TextView className;
         TextView subjectName;
         public ClassViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener
@@ -36,6 +37,13 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
             className = itemView.findViewById(R.id.class_tv);
             subjectName = itemView.findViewById(R.id.subject_tv);
             itemView.setOnClickListener(v->onItemClickListener.onClick((getAdapterPosition())));
+            itemView.setOnCreateContextMenuListener(this);
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+            contextMenu.add(getAdapterPosition(),0,0,"Modifier");
+            contextMenu.add(getAdapterPosition(),1,0,"Suprimer");
         }
     }
 

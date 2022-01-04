@@ -26,6 +26,8 @@ public class ScanCodeActivitysearch extends AppCompatActivity implements ZXingSc
     @Override
     public void handleResult(Result result) {
 
+
+
         scanStudentsActivity.resultsearcheview.setText(result.getText());
 
         onBackPressed();

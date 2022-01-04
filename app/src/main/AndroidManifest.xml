@@ -13,7 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StudentActivity"></activity>
+        <activity android:name=".SheetActivity" />
+        <activity android:name=".sheet_list" />
+        <activity android:name=".modifie_class_Dialog" />
+        <activity android:name=".modifie_student_Dialog" />
+        <activity android:name=".StudentActivity" />
         <activity android:name=".addClass" />
         <activity android:name=".attendabce" />
         <activity android:name=".ScanCodeActivitysearch" />
@@ -21,16 +25,19 @@
         <activity android:name=".ScanCodeActivitydel" />
         <activity android:name=".viewListActivity" />
         <activity android:name=".scanStudentsActivity" />
+        <activity android:name=".scanfordialog" />
         <activity android:name=".deleteStudentsActivity" />
         <activity android:name=".addStudentActivity" />
-        <activity android:name=".dashboardActivity" />
+        <activity
+            android:name=".dashboardActivity"
+            android:theme="@style/FullScreenTheme" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".SplashsActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

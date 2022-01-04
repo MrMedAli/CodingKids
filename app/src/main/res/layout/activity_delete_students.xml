@@ -5,81 +5,111 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".deleteStudentsActivity"
-    android:orientation="vertical"
-    android:background="@drawable/background">
+    android:orientation="vertical">
     <android.support.v7.widget.Toolbar
-
+        android:id="@+id/toolbar_beginner"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/uper"
-        android:id="@+id/toolbar"
-        android:padding="10dp"
-
-        tools:ignore="MissingConstraints"
-        android:layout_marginBottom="70dp">
-
-        <ImageButton
-            android:id="@+id/back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:baselineAlignBottom="true"
-            android:src="@drawable/ic_baseline_arrow_back_ios_24back"
-            android:background="@null"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Suprimer un etudiant"
-            android:textColor="#BABABA"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-    </android.support.v7.widget.Toolbar>
-
-
-    <TextView
-        android:id="@+id/barcodedelete"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/toolbar"
-        android:layout_marginTop="184dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/blanks"
-        android:drawableStart="@drawable/qr_code"
-        android:drawablePadding="10dp"
-        android:hint="QR Code Number"
-        android:inputType="textPersonName"
-        android:padding="10dp" />
-
-    <Button
-        android:id="@+id/buttonscandelete"
+        android:layout_height="wrap_content"
+        app:menu="@menu/only_dot"
+        android:background="#FFFFFF"
+        app:title="         Suprimerz un étudiant"
+        />
+    <android.support.design.widget.FloatingActionButton
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:backgroundTint="#FFFFFF"
+        android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24back"
+        app:layout_anchor="@id/toolbar_beginner"
+        app:borderWidth="0dp"
 
-        android:layout_centerHorizontal="true"
+        app:tint="@null"
+        />
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="100dp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:clipToPadding="false">
 
-        android:layout_marginTop="250dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="QR Code"
-        android:textStyle="italic"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="211dp" />
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/deleteItemToTheDatabasebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/buttonscandelete"
-        android:layout_centerHorizontal="true"
 
-        android:layout_marginBottom="-70dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Delete Item"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="211dp" />
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="250dp">
+
+
+                <android.support.design.widget.TextInputLayout
+
+                    android:id="@+id/barre"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp">
+                    <EditText
+                        android:drawableTint="@color/colorGray"
+                        android:drawablePadding="10dp"
+                        android:id="@+id/barcodedelete"
+                        android:layout_width="330dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Code QR"
+                        android:inputType="text"
+                        android:drawableStart="@drawable/qr_code" />
+
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.FloatingActionButton
+                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_alignRight="@id/barre"
+                    android:id="@+id/buttonscandelete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_camera_alt_black_24dp"
+                    app:borderWidth="0dp"
+                    app:tint="@null"
+                    android:layout_marginRight="5dp"/>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_marginTop="25dp"
+                android:id="@+id/deleteItemToTheDatabasebtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/gradient_theme_corner_rounded"
+                android:padding="16dp"
+                android:weightSum="5">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:text="Supprimer"
+                    android:textColor="@color/white"
+                    android:drawableRight="@drawable/ic_delete_black_24dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+
+
 
 </RelativeLayout>
